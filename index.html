@@ -405,7 +405,7 @@
 
 <div class="popup-overlay" id="popup">
   <div class="popup-box">
-    <button class="popup-close" onclick="document.getElementById('popup').classList.remove('active')">✕</button>
+    <button class="popup-close" onclick="closePopup()">✕</button>
     <img class="popup-poster" src="our-house-poster.jpg" alt="Our House event poster">
     <div class="popup-body">
       <span class="popup-eyebrow">Under 18 · Family Event · Free</span>
@@ -417,9 +417,36 @@
   </div>
 </div>
 
+<audio id="popupAudio" src="popup-track.mp3" preload="auto"></audio>
+
+<script>
+  function closePopup(){
+    document.getElementById('popup').classList.remove('active');
+    var audio = document.getElementById('popupAudio');
+    audio.pause();
+    audio.currentTime = 0;
+  }
+</script>
+
 <script>
   window.addEventListener('load', function(){
     document.getElementById('popup').classList.add('active');
+    var audio = document.getElementById('popupAudio');
+    var playPromise = audio.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(function(){
+        // Autoplay blocked until user interacts — start on first click/tap anywhere
+        var startOnInteract = function(){
+          if (document.getElementById('popup').classList.contains('active')) {
+            audio.play();
+          }
+          document.removeEventListener('click', startOnInteract);
+          document.removeEventListener('touchstart', startOnInteract);
+        };
+        document.addEventListener('click', startOnInteract);
+        document.addEventListener('touchstart', startOnInteract);
+      });
+    }
   });
 </script>
 
