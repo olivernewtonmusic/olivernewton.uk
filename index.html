@@ -80,6 +80,12 @@
   /* ---------- HERO ---------- */
   .hero{ position:relative; padding:80px 0 60px; }
   .hero-grid{ display:grid; grid-template-columns: 1.1fr 0.9fr; gap:52px; align-items:center; }
+  .hero-copy{ position:relative; }
+  .hero-title-row{ display:flex; align-items:center; gap:18px; flex-wrap:wrap; }
+  .hero-logo{ width:150px; height:auto; flex-shrink:0; }
+  @media (max-width:640px){
+    .hero-logo{ width:96px; }
+  }
   .hero h1{ font-size:clamp(56px, 8vw, 108px); text-transform:uppercase; }
   .hero h1 .accent{ color:var(--mint); }
   .hero-tagline{ margin-top:22px; max-width:480px; font-size:17px; line-height:1.65; color:rgba(244,240,255,0.78); }
@@ -211,9 +217,12 @@
 
 <section class="hero foil">
   <div class="wrap hero-grid">
-    <div>
+    <div class="hero-copy">
       <span class="eyebrow">Wigan · UK</span>
-      <h1>YOUNG<br><span class="accent">DJ</span></h1>
+      <div class="hero-title-row">
+        <h1>YOUNG<br><span class="accent">DJ</span></h1>
+        <img class="hero-logo" src="oliver-logo.webp" alt="Oliver Newton logo">
+      </div>
       <p class="hero-tagline">Oliver Newton is a 13-year-old DJ from Wigan, bringing high-energy sets and seamless mixes to birthday parties, school discos, and community events across the borough.</p>
       <div class="hero-badges">
         <span class="badge">Birthday Parties</span>
@@ -296,7 +305,7 @@
           <h3>Latest Set</h3>
           <p>A fresh mix showing off the blend of energy and flow Oliver brings to every booking.</p>
         </div>
-        <a class="btn btn-ghost" href="https://www.mixcloud.com/Alltrax_/oliver-newton-wigan-youth-zone-takeover-03122025/" target="_blank">Listen Now →</a>
+        <a class="btn btn-ghost" href="https://olivernewton.uk/olivernewton/dj-mixes">Listen Now →</a>
       </div>
       <div class="card">
         <div>
@@ -304,7 +313,7 @@
           <h3>All Platforms</h3>
           <p>Stream Oliver's music on Spotify, Apple Music, and everywhere else you listen.</p>
         </div>
-        <a class="btn btn-ghost" href="https://linktr.ee/olivernewtonstreamingplatforms" target="_blank">Take Me There →</a>
+        <a class="btn btn-ghost" href="https://linktr.ee/olivernewtonstreamingplatforms">Take Me There →</a>
       </div>
     </div>
   </div>
@@ -332,7 +341,7 @@
     <span class="eyebrow" style="justify-content:center;">Get In Touch</span>
     <h2>Let's make it<br>unforgettable.</h2>
     <p>Get in touch to check availability and lock in Oliver for your next event.</p>
-    <a class="btn btn-primary" href="https://wa.me/+447368803842" target="_blank">Message on WhatsApp →</a>
+    <a class="btn btn-primary" href="https://wa.me/+447368803842">Message on WhatsApp →</a>
   </div>
 </section>
 
