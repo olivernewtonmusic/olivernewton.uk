@@ -39,10 +39,12 @@
   .popup-overlay.active{ opacity:1; pointer-events:auto; }
   .popup-box{
     background:#0A0210; border:2px solid #FF3EC9; border-radius:18px;
-    max-width:380px; width:100%; padding:0 0 30px; text-align:center;
-    position:relative; overflow-y:auto; max-height:90vh;
+    max-width:380px; width:100%; text-align:center;
+    position:relative; max-height:90vh;
+    display:flex; flex-direction:column; overflow:hidden;
     box-shadow:0 0 40px rgba(255,62,201,0.35), inset 0 0 30px rgba(70,225,255,0.08);
   }
+  .popup-scroll{ overflow-y:auto; padding-bottom:30px; }
   .popup-poster{ width:100%; display:block; }
   .popup-body{ padding:24px 26px 0; }
   .popup-eyebrow{
@@ -61,10 +63,14 @@
     box-shadow:0 0 20px rgba(255,62,201,0.5);
   }
   .popup-close{
-    position:absolute; top:14px; right:16px; cursor:pointer;
-    font-size:20px; color:rgba(244,240,255,0.6); background:none; border:none;
+    position:absolute; top:12px; right:12px; z-index:10;
+    width:34px; height:34px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; font-size:18px; line-height:1;
+    background:rgba(10,2,16,0.85); border:1.5px solid #FF3EC9; color:#FFFFFF;
+    box-shadow:0 2px 10px rgba(0,0,0,0.5);
   }
-  .popup-close:hover{ color:#46E1FF; }
+  .popup-close:hover{ background:#FF3EC9; color:#0A0210; }
   a{ color:inherit; text-decoration:none; }
   .wrap{ max-width:var(--maxw); margin:0 auto; padding:0 28px; }
   img{ display:block; width:100%; height:100%; object-fit:cover; }
@@ -407,13 +413,15 @@
 <div class="popup-overlay" id="popup">
   <div class="popup-box">
     <button class="popup-close" onclick="closePopup()">✕</button>
-    <img class="popup-poster" src="our-house-poster.jpg" alt="Our House event poster">
-    <div class="popup-body">
-      <span class="popup-eyebrow">Under 18 · Family Event · Free</span>
-      <h3>Our House</h3>
-      <div class="popup-sub">30 JULY · 6:30–8:30PM · THE VENUE, WIGAN</div>
-      <p>House, deep, funk & tech — Oliver's playing an all-ages event for Wigan Youth Zone. Grab your free ticket now.</p>
-      <a class="popup-btn" href="https://olivernewton.link/ourhouse" target="_blank">Get Tickets →</a>
+    <div class="popup-scroll">
+      <img class="popup-poster" src="our-house-poster.jpg" alt="Our House event poster">
+      <div class="popup-body">
+        <span class="popup-eyebrow">Under 18 · Family Event · Free</span>
+        <h3>Our House</h3>
+        <div class="popup-sub">30 JULY · 6:30–8:30PM · THE VENUE, WIGAN</div>
+        <p>House, deep, funk & tech — Oliver's playing an all-ages event for Wigan Youth Zone. Grab your free ticket now.</p>
+        <a class="popup-btn" href="https://olivernewton.link/ourhouse" target="_blank">Get Tickets →</a>
+      </div>
     </div>
   </div>
 </div>
