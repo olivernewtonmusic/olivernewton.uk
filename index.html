@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="icon" type="image/jpg" href="favicon.jpg">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Monoton&family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
     --ink:#F4F0FF;
@@ -29,48 +29,6 @@
   }
   ::selection{ background:var(--mint); color:var(--black); }
 
-  /* ---------- POPUP ---------- */
-  .popup-overlay{
-    position:fixed; inset:0; background:rgba(5,0,10,0.9);
-    display:flex; align-items:center; justify-content:center;
-    z-index:1000; padding:20px;
-    opacity:0; pointer-events:none; transition:opacity .25s ease;
-  }
-  .popup-overlay.active{ opacity:1; pointer-events:auto; }
-  .popup-box{
-    background:#0A0210; border:2px solid #FF3EC9; border-radius:18px;
-    max-width:380px; width:100%; text-align:center;
-    position:relative; max-height:90vh;
-    display:flex; flex-direction:column; overflow:hidden;
-    box-shadow:0 0 40px rgba(255,62,201,0.35), inset 0 0 30px rgba(70,225,255,0.08);
-  }
-  .popup-scroll{ overflow-y:auto; padding-bottom:30px; }
-  .popup-poster{ width:100%; display:block; }
-  .popup-body{ padding:24px 26px 0; }
-  .popup-eyebrow{
-    font-family:'Space Mono', monospace; font-size:12px; letter-spacing:0.18em;
-    text-transform:uppercase; color:#46E1FF;
-  }
-  .popup-box h3{
-    font-family:'Bebas Neue'; font-size:40px; text-transform:uppercase; margin:10px 0 6px;
-    color:#FF3EC9; text-shadow:0 0 14px rgba(255,62,201,0.6);
-  }
-  .popup-box .popup-sub{ font-family:'Space Mono', monospace; font-size:12px; color:#46E1FF; letter-spacing:0.08em; margin-bottom:16px; }
-  .popup-box p{ font-size:15px; color:rgba(244,240,255,0.85); line-height:1.6; margin-bottom:22px; }
-  .popup-btn{
-    display:inline-flex; align-items:center; gap:8px; padding:14px 26px; border-radius:12px;
-    background:#FF3EC9; color:#0A0210; font-weight:700; text-decoration:none; font-size:14px;
-    box-shadow:0 0 20px rgba(255,62,201,0.5);
-  }
-  .popup-close{
-    position:absolute; top:12px; right:12px; z-index:10;
-    width:34px; height:34px; border-radius:50%;
-    display:flex; align-items:center; justify-content:center;
-    cursor:pointer; font-size:18px; line-height:1;
-    background:rgba(10,2,16,0.85); border:1.5px solid #FF3EC9; color:#FFFFFF;
-    box-shadow:0 2px 10px rgba(0,0,0,0.5);
-  }
-  .popup-close:hover{ background:#FF3EC9; color:#0A0210; }
   a{ color:inherit; text-decoration:none; }
   .wrap{ max-width:var(--maxw); margin:0 auto; padding:0 28px; }
   img{ display:block; width:100%; height:100%; object-fit:cover; }
@@ -139,6 +97,18 @@
     padding:8px 14px; border-radius:999px; border:1px solid var(--line); color:rgba(244,240,255,0.85);
   }
   .hero-ctas{ display:flex; gap:14px; margin-top:34px; flex-wrap:wrap; }
+  .btn-neon{
+    font-family:'Monoton', 'Bebas Neue', sans-serif;
+    background:#0A0210; color:#F4F0FF;
+    border:2px solid #A855F7;
+    box-shadow:0 0 8px #A855F7, 0 0 18px rgba(168,85,247,0.6), inset 0 0 10px rgba(168,85,247,0.25);
+    text-shadow:0 0 6px #A855F7, 0 0 14px #A855F7;
+    letter-spacing:0.03em;
+  }
+  .btn-neon:hover{
+    box-shadow:0 0 12px #A855F7, 0 0 28px rgba(168,85,247,0.8), inset 0 0 14px rgba(168,85,247,0.35);
+    transform:translateY(-2px);
+  }
   .btn{
     font-family:'Space Mono', monospace; font-size:13px; letter-spacing:0.05em; text-transform:uppercase;
     padding:15px 26px; border-radius:999px; display:inline-flex; align-items:center; gap:8px;
@@ -283,7 +253,7 @@
         <h1>YOUNG<br><span class="accent">DJ</span></h1>
         <img class="hero-logo" src="oliver-logo.webp" alt="Oliver Newton logo">
       </div>
-      <p class="hero-tagline">Oliver Newton is a Young DJ from Wigan with over 5 years of experience, bringing high-energy sets and seamless mixes to birthday parties, school discos, and community events across the borough.</p>
+      <p class="hero-tagline">Oliver Newton is a 13-year-old DJ from Wigan, bringing high-energy sets and seamless mixes to birthday parties, school discos, and community events across the borough.</p>
       <div class="hero-badges">
         <span class="badge">Birthday Parties</span>
         <span class="badge">School Discos</span>
@@ -293,6 +263,7 @@
       <div class="hero-ctas">
         <a class="btn btn-primary" href="#book">Book Oliver →</a>
         <a class="btn btn-ghost" href="#listen">Hear a Mix</a>
+        <a class="btn btn-neon" href="https://olivernewton.uk/ourhouse" target="_blank">Our House →</a>
       </div>
     </div>
     <div class="hero-photo">
@@ -365,7 +336,7 @@
           <h3>Latest Set</h3>
           <p>A fresh mix showing off the blend of energy and flow Oliver brings to every booking.</p>
         </div>
-        <a class="btn btn-ghost" href="https://olivernewton.uk/mixes">Listen Now →</a>
+        <a class="btn btn-ghost" href="https://olivernewton.uk/olivernewton/dj-mixes">Listen Now →</a>
       </div>
       <div class="card">
         <div>
@@ -409,55 +380,6 @@
   <span>© 2026 Oliver Newton</span>
   <span>Wigan, UK</span>
 </footer>
-
-<div class="popup-overlay" id="popup">
-  <div class="popup-box">
-    <button class="popup-close" onclick="closePopup()">✕</button>
-    <div class="popup-scroll">
-      <img class="popup-poster" src="our-house-poster.jpg" alt="Our House event poster">
-      <div class="popup-body">
-        <span class="popup-eyebrow">Under 18 · Family Event · Free</span>
-        <h3>Our House</h3>
-        <div class="popup-sub">30 JULY · 6:30–8:30PM · THE VENUE, WIGAN</div>
-        <p>House, deep, funk & tech — Oliver's playing an all-ages event for Wigan Youth Zone. Grab your free ticket now.</p>
-        <a class="popup-btn" href="https://olivernewton.uk/ourhouse" target="_blank">Get Tickets →</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<audio id="popupAudio" src="popup-track.mp3" preload="auto"></audio>
-
-<script>
-  function closePopup(){
-    document.getElementById('popup').classList.remove('active');
-    var audio = document.getElementById('popupAudio');
-    audio.pause();
-    audio.currentTime = 0;
-  }
-</script>
-
-<script>
-  window.addEventListener('load', function(){
-    document.getElementById('popup').classList.add('active');
-    var audio = document.getElementById('popupAudio');
-    var playPromise = audio.play();
-    if (playPromise !== undefined) {
-      playPromise.catch(function(){
-        // Autoplay blocked until user interacts — start on first click/tap anywhere
-        var startOnInteract = function(){
-          if (document.getElementById('popup').classList.contains('active')) {
-            audio.play();
-          }
-          document.removeEventListener('click', startOnInteract);
-          document.removeEventListener('touchstart', startOnInteract);
-        };
-        document.addEventListener('click', startOnInteract);
-        document.addEventListener('touchstart', startOnInteract);
-      });
-    }
-  });
-</script>
 
 <a class="whatsapp-float" href="https://wa.me/+447368803842" target="_blank" aria-label="Message on WhatsApp">
   <svg viewBox="0 0 32 32" fill="black" xmlns="http://www.w3.org/2000/svg">
