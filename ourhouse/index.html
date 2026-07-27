@@ -108,10 +108,38 @@
   /* crinkled foil texture wash, used behind sections */
   .foil{ position:relative; background:var(--black); }
 
-  
+  /* ---------- SITE HEADER ---------- */
+  .site-header{
+    position:sticky; top:0; z-index:100;
+    background:rgba(10,10,10,0.82);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .site-header .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    padding-top:16px; padding-bottom:16px;
+  }
+  .site-header .brand{
+    display:flex; align-items:center; gap:12px;
+  }
+  .site-header .brand img{
+    width:auto; height:44px; object-fit:contain;
+  }
+  .site-header .brand-fallback{
+    font-family:'Bebas Neue'; font-size:20px; letter-spacing:0.04em; text-transform:uppercase;
+    color:var(--ink);
+  }
+  .site-header .header-cta{
+    font-family:'Space Mono', monospace; font-size:12px; letter-spacing:0.05em; text-transform:uppercase;
+    padding:11px 20px; border-radius:999px; background:var(--mint); color:var(--black); font-weight:700;
+  }
+  @media (max-width:640px){
+    .site-header .brand img{ height:34px; }
+    .site-header .header-cta{ padding:9px 16px; font-size:11px; }
+  }
 
   /* ---------- HERO ---------- */
-  .hero{ position:relative; padding:80px 0 60px; }
+  .hero{ position:relative; padding:96px 0 76px; }
   .hero-grid{ display:grid; grid-template-columns: 1.1fr 0.9fr; gap:52px; align-items:center; }
   .hero-copy{ position:relative; }
   .hero-title-row{ display:flex; align-items:center; gap:18px; flex-wrap:wrap; }
@@ -245,19 +273,32 @@
     .gallery a:nth-child(1){ grid-column:span 2; grid-row:span 1; }
   }
 </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="/" class="brand" aria-label="Our House home">
+      <img src="our-house-logo.png" alt="Our House logo">
+    </a>
+    <a class="header-cta" href="#details">Get Tickets →</a>
+  </div>
+</header>
+
+<section class="hero" style="padding-bottom:0;">
   <div class="wrap" style="max-width:640px; text-align:center;">
     <span class="eyebrow" style="justify-content:center;">Under 18 · Family Event · Free</span>
-    <h1 style="margin-top:14px;">OUR<br><span class="accent">HOUSE</span></h1>
-    <div style="font-family:'Space Mono', monospace; font-size:13px; color:var(--blue); letter-spacing:0.08em; margin-top:16px;">
+    <h1 style="margin-top:22px;">OUR<br><span class="accent">HOUSE</span></h1>
+    <div style="font-family:'Space Mono', monospace; font-size:13px; color:var(--blue); letter-spacing:0.08em; margin-top:24px;">
       30 JULY · 6:30–8:30PM · THE VENUE, WIGAN
     </div>
-    <div class="hero-ctas" style="justify-content:center; margin-top:30px;">
+    <div class="hero-ctas" style="justify-content:center; margin-top:36px;">
       <a class="btn btn-primary" href="#details">Get Tickets →</a>
     </div>
   </div>
 </section>
 
-<section class="foil" style="padding:0 0 90px;">
+<section class="foil" style="padding:64px 0 90px; border-top:none;">
   <div class="wrap" style="max-width:640px;">
     <img src="our-house-poster.jpg" alt="Our House event poster" style="width:100%; border-radius:18px; border:1px solid var(--line); display:block;">
   </div>
