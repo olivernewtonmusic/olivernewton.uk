@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oliver Newton — Leave a Review</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#0a0a0a url('texture.jpg') center/cover no-repeat;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color:#fff;
+    text-align:center;
+  }
+  .wrap {
+    padding: 32px 24px;
+    max-width:420px;
+    background: rgba(0,0,0,0.55);
+    border-radius: 20px;
+    backdrop-filter: blur(2px);
+  }
+  .badge {
+    display:inline-block;
+    font-size:12px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:#10daa4;
+    border:1px solid #10daa4;
+    border-radius:999px;
+    padding:6px 16px;
+    margin-bottom:24px;
+  }
+  h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size:42px;
+    letter-spacing:5px;
+    text-transform:uppercase;
+    font-weight:400;
+    color:#10daa4;
+    margin-bottom:10px;
+  }
+  p.sub { color:#999; font-size:14px; margin-bottom:32px; }
+  .qr-box {
+    background:#fff;
+    display:inline-block;
+    padding:18px;
+    border-radius:16px;
+    box-shadow: 0 0 40px rgba(16,218,164,0.35);
+  }
+  #qrcode { width:220px; height:220px; }
+  p.cta {
+    margin-top:28px;
+    font-size:15px;
+    color:#eaeaea;
+    font-weight:600;
+    letter-spacing:1px;
+  }
+  a.link {
+    display:inline-block;
+    margin-top:12px;
+    color:#10daa4;
+    font-size:13px;
+    text-decoration:none;
+    border-bottom:1px solid #10daa4;
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="badge">Wigan · UK</div>
+    <h1>Oliver Newton</h1>
+    <p class="sub">Scan to leave a Google review</p>
+    <div class="qr-box">
+      <div id="qrcode"></div>
+    </div>
+    <p class="cta">Enjoyed the set? Leave a review ⭐</p>
+    <a class="link" href="https://olivernewton.uk/review">olivernewton.uk/review</a>
+  </div>
+
+  <script>
+    new QRCode(document.getElementById("qrcode"), {
+      text: "https://olivernewton.uk/review",
+      width: 220,
+      height: 220,
+      colorDark: "#0a0a0a",
+      colorLight: "#ffffff",
+      correctLevel: QRCode.CorrectLevel.H
+    });
+  </script>
+</body>
+</html>
