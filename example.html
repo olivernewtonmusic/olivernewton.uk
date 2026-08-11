@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oliver Newton — Young DJ, Wigan</title>
+<meta name="description" content="Oliver Newton is a 13-year-old DJ from Wigan bringing high-energy sets to birthday parties, school discos and community events.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --gunmetal:#14161A;
+    --gunmetal-2:#1B1E23;
+    --steel:#24272E;
+    --steel-2:#2E323A;
+    --cream:#F4EFE6;
+    --muted: rgba(244,239,230,.62);
+    --ice:#5FD3FA;
+    --amber:#FFB648;
+    --red:#FF5B5B;
+    --line: rgba(244,239,230,.12);
+    --display: 'Barlow Condensed', system-ui, sans-serif;
+    --body: 'Inter', system-ui, sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+    --header-h: 72px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--gunmetal);
+    color:var(--cream);
+    font-family:var(--body);
+    line-height:1.55;
+    overflow-x:hidden;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important;}
+  }
+  a{color:inherit; text-decoration:none;}
+  ul{list-style:none;}
+  h1,h2,h3{font-family:var(--display); font-weight:700; text-transform:uppercase; letter-spacing:.01em;}
+  .eyebrow{
+    font-family:var(--mono); font-size:11.5px; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--ice); display:flex; align-items:center; gap:10px; margin-bottom:14px;
+  }
+  .eyebrow::before{content:''; width:16px; height:2px; background:var(--ice); display:inline-block;}
+
+  /* ===== Header ===== */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:100; height:var(--header-h);
+    background:rgba(20,22,26,.86); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{max-width:1400px; margin:0 auto; height:100%; padding:0 28px; display:flex; align-items:center; justify-content:space-between;}
+  .brand{display:flex; align-items:center; gap:11px; font-family:var(--display); font-size:19px; font-weight:700; letter-spacing:.03em; text-transform:uppercase;}
+  .brand-led{width:11px; height:11px; border-radius:2px; background:var(--steel-2); border:1px solid var(--line); position:relative;}
+  .brand-led::after{content:''; position:absolute; inset:2px; border-radius:1px; background:var(--ice); animation:blink 2.4s ease-in-out infinite;}
+  @keyframes blink{0%,100%{opacity:1;} 50%{opacity:.25;}}
+  nav.links{display:flex; gap:30px; font-size:14.5px; font-weight:500;}
+  nav.links a{opacity:.8; transition:opacity .2s, color .2s;}
+  nav.links a:hover{opacity:1; color:var(--ice);}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; font-family:var(--body); font-weight:600; font-size:14px;
+    padding:12px 22px; border-radius:4px; border:none; cursor:pointer;
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .btn:focus-visible, a:focus-visible, button:focus-visible{outline:3px solid var(--ice); outline-offset:3px;}
+  .btn-primary{background:var(--amber); color:var(--gunmetal);}
+  .btn-primary:hover{transform:translateY(-2px); box-shadow:0 10px 22px rgba(255,182,72,.28);}
+  .btn-ghost{background:transparent; color:var(--cream); border:1.5px solid var(--line);}
+  .btn-ghost:hover{border-color:var(--ice); color:var(--ice);}
+  .btn-sm{padding:9px 16px; font-size:13px;}
+
+  main{padding-top:var(--header-h);}
+
+  /* ===== Rig layout: sticky controller beside scrolling content ===== */
+  .rig-wrap{display:grid; grid-template-columns:1fr 1fr; align-items:start;}
+  .stage{grid-column:2; position:sticky; top:var(--header-h); height:calc(100vh - var(--header-h)); order:2;
+    border-left:1px solid var(--line); background:
+      linear-gradient(180deg, var(--gunmetal-2), var(--gunmetal) 70%);
+    overflow:hidden;}
+  .content-col{grid-column:1; order:1; padding:0 6vw;}
+
+  .unit{position:relative; width:100%; height:100%;}
+  .frame{position:absolute; inset:0; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:34px;}
+  .frame-eq{opacity:0;}
+
+  /* Jog wheel */
+  .jog{
+    position:relative; width:min(58%, 360px); aspect-ratio:1/1; border-radius:50%;
+    background:
+      repeating-conic-gradient(from 0deg, rgba(255,255,255,.025) 0deg 1deg, transparent 1deg 3deg),
+      radial-gradient(circle at 34% 28%, #3a3f47, #16181c 68%);
+    box-shadow:0 0 0 7px #0d0e11, 0 0 26px rgba(95,211,250,.18), 0 24px 50px rgba(0,0,0,.55), inset 0 0 34px rgba(0,0,0,.65);
+  }
+  .jog.idle-spin{animation:spin 9s linear infinite;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .jog-screen{
+    position:absolute; inset:0; margin:auto; width:46%; height:46%; border-radius:10px;
+    background:#0A0C0E; border:1px solid rgba(95,211,250,.35); box-shadow:inset 0 0 14px rgba(0,0,0,.8), 0 0 10px rgba(95,211,250,.12);
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; padding:8px; text-align:center;
+  }
+  .jog-screen span{font-family:var(--mono); letter-spacing:.04em;}
+  #screenL1{font-size:12.5px; color:var(--ice); font-weight:600;}
+  #screenL2{font-size:10.5px; color:var(--muted);}
+  .hand{position:absolute; width:34%; bottom:6%; right:2%; opacity:0; filter:drop-shadow(0 6px 10px rgba(0,0,0,.5));}
+  .scroll-hint{position:absolute; bottom:36px; left:0; right:0; text-align:center; font-family:var(--mono); font-size:11.5px; letter-spacing:.1em; color:var(--muted); transition:opacity .4s;}
+  .scroll-hint span{display:inline-block; animation:bob 1.6s ease-in-out infinite;}
+  @keyframes bob{0%,100%{transform:translateY(0);} 50%{transform:translateY(5px);}}
+
+  /* EQ cluster */
+  .eq-cluster{display:flex; flex-direction:column; align-items:center; gap:26px;}
+  .knob-row{display:flex; align-items:flex-end; gap:26px;}
+  .knob{border-radius:50%; background:radial-gradient(circle at 35% 30%, #3a3f47, #16181c 70%); box-shadow:0 0 0 4px #0d0e11, 0 10px 20px rgba(0,0,0,.5); position:relative;}
+  .knob-sm{width:52px; height:52px;}
+  .knob-sm .ptr{position:absolute; top:4px; left:50%; width:2px; height:38%; background:var(--muted); transform-origin:bottom center; transform:translateX(-50%) rotate(-12deg); animation:wiggle 3.4s ease-in-out infinite;}
+  .knob-sm:nth-child(2) .ptr{animation-delay:.5s;}
+  .knob-sm:nth-child(3) .ptr{animation-delay:1s;}
+  @keyframes wiggle{0%,100%{transform:translateX(-50%) rotate(-12deg);} 50%{transform:translateX(-50%) rotate(12deg);}}
+  .knob-label{font-family:var(--mono); font-size:9.5px; letter-spacing:.08em; color:var(--muted); text-align:center; margin-top:8px;}
+  .knob-col{display:flex; flex-direction:column; align-items:center;}
+  .selector{width:120px; height:120px; margin-top:4px;}
+  .selector .tick{position:absolute; width:2px; height:8px; background:var(--line); left:50%; top:-2px; transform-origin:1px 62px;}
+  .selector .ptr{position:absolute; top:8px; left:50%; width:3px; height:44%; background:var(--ice); border-radius:2px; transform-origin:bottom center; transform:translateX(-50%) rotate(-64deg); transition:transform .4s cubic-bezier(.2,.8,.2,1); box-shadow:0 0 8px rgba(95,211,250,.6);}
+  .stepper{display:flex; gap:7px; margin-top:16px;}
+  .stepper span{width:6px; height:6px; border-radius:50%; background:var(--steel-2); transition:background .3s;}
+  .stepper span.active{background:var(--amber);}
+  .readout{text-align:center; margin-top:6px;}
+  #eqMain{font-family:var(--mono); font-size:14px; letter-spacing:.06em; color:var(--cream); font-weight:600;}
+  #eqSub{font-family:var(--mono); font-size:11px; color:var(--muted); margin-top:4px;}
+  .selector.settled .ptr{animation:pulse 2s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{box-shadow:0 0 8px rgba(95,211,250,.6);} 50%{box-shadow:0 0 16px rgba(255,182,72,.7);}}
+
+  /* ===== Content sections ===== */
+  .content-col section{padding:120px 0; max-width:520px;}
+  #hero{padding-top:64px; min-height:calc(100vh - var(--header-h)); display:flex; flex-direction:column; justify-content:center;}
+  .location-pill{
+    display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:12px; letter-spacing:.08em;
+    background:var(--steel); border:1px solid var(--line); padding:8px 14px; border-radius:4px; margin-bottom:24px; width:fit-content;
+  }
+  #hero h1{font-size:clamp(46px,6.4vw,80px); line-height:.95; margin-bottom:22px;}
+  #hero h1 em{font-style:normal; color:var(--amber);}
+  p.sub{font-size:18px; color:var(--muted); margin-bottom:28px;}
+  .tag-row{display:flex; flex-wrap:wrap; gap:9px; margin-bottom:32px;}
+  .tag{font-family:var(--mono); font-size:11px; letter-spacing:.04em; padding:7px 12px; border-radius:3px; background:var(--steel); border:1px solid var(--line); color:var(--muted);}
+  .cta-row{display:flex; gap:14px; flex-wrap:wrap;}
+
+  h2{font-size:clamp(28px,3.6vw,40px); margin-bottom:20px;}
+  .content-col p{color:var(--muted); font-size:16px; margin-bottom:16px;}
+  .area-list{font-family:var(--mono); font-size:13px; color:var(--ice); line-height:1.9; margin-bottom:24px;}
+  .stat-row{display:flex; gap:12px; flex-wrap:wrap; margin-top:8px;}
+  .stat{background:var(--steel); border:1px solid var(--line); border-radius:6px; padding:16px 20px; min-width:104px;}
+  .stat b{display:block; font-family:var(--display); font-size:28px; color:var(--amber); text-transform:none;}
+  .stat span{font-size:11px; font-family:var(--mono); color:var(--muted); letter-spacing:.05em;}
+
+  .event-list{border-top:1px solid var(--line); margin-top:8px;}
+  .event{padding:22px 0; border-bottom:1px solid var(--line);}
+  .event-tag{font-family:var(--mono); font-size:11px; color:var(--amber); letter-spacing:.06em; margin-bottom:6px;}
+  .event h3{font-size:21px; margin-bottom:5px; letter-spacing:0;}
+  .event p{font-size:14.5px; margin-bottom:0;}
+
+  /* Below-fold full-width sections (still inside rig for sticky, but wider) */
+  #gallery, #listen, #follow, #contact{max-width:520px;}
+  .gallery-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  .gallery-item{aspect-ratio:1/1; border-radius:6px; border:1px solid var(--line); position:relative; overflow:hidden; display:flex; align-items:flex-end; padding:12px; font-family:var(--mono); font-size:11px; color:var(--muted);}
+  .gallery-item span{position:relative; z-index:2;}
+  .gallery-item::before{content:''; position:absolute; inset:0; opacity:.5;}
+  .g1::before{background:radial-gradient(circle at 30% 20%, var(--ice), var(--gunmetal-2) 70%);}
+  .g2::before{background:radial-gradient(circle at 70% 30%, var(--amber), var(--gunmetal-2) 70%);}
+  .g3::before{background:radial-gradient(circle at 40% 70%, var(--red), var(--gunmetal-2) 70%);}
+  .g4::before{background:radial-gradient(circle at 60% 60%, var(--ice), var(--gunmetal-2) 70%);}
+
+  .card{background:var(--steel); border:1px solid var(--line); border-radius:8px; padding:26px; margin-bottom:16px;}
+  .card .kicker{font-family:var(--mono); font-size:11px; letter-spacing:.1em; color:var(--ice); text-transform:uppercase;}
+  .card h3{font-size:22px; margin:8px 0 8px; text-transform:none; letter-spacing:0;}
+  .card p{font-size:14.5px; margin-bottom:18px;}
+
+  .social-grid{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
+  .social-item{padding:16px; border:1px solid var(--line); border-radius:6px; text-align:center; font-size:13.5px; font-weight:600; background:var(--steel); transition:border-color .2s, color .2s;}
+  .social-item:hover{border-color:var(--ice); color:var(--ice);}
+
+  #contact{padding-bottom:80px;}
+  .cta-band{background:var(--steel); border:1px solid var(--line); border-radius:10px; padding:40px 32px;}
+  .cta-band h2{margin-bottom:14px;}
+  .cta-band p{margin-bottom:22px;}
+
+  footer{border-top:1px solid var(--line);}
+  .footer-row{max-width:1400px; margin:0 auto; padding:32px 28px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; font-size:13px; color:var(--muted); font-family:var(--mono);}
+
+  /* ===== Mobile ===== */
+  @media (max-width:880px){
+    nav.links{display:none;}
+    .rig-wrap{display:block;}
+    .stage{position:static; height:auto; grid-column:auto; border-left:none; border-bottom:1px solid var(--line); padding:56px 24px;}
+    .content-col{padding:0 24px;}
+    .frame{position:relative; inset:auto;}
+    .frame-eq{display:none;}
+    .scroll-hint{display:none;}
+    .content-col section{max-width:none; padding:70px 0;}
+    #hero{min-height:auto; padding-top:40px;}
+    .gallery-grid{grid-template-columns:1fr 1fr;}
+    .social-grid{grid-template-columns:1fr 1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a href="#top" class="brand"><span class="brand-led"></span> OLIVER NEWTON</a>
+    <nav class="links">
+      <a href="#about">About</a>
+      <a href="#events">Events</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#listen">Listen</a>
+    </nav>
+    <a href="https://wa.me/+447368803842" class="btn btn-primary btn-sm">Book Oliver</a>
+  </div>
+</header>
+
+<main id="top">
+  <div class="rig-wrap">
+
+    <div class="stage" aria-hidden="true">
+      <div class="unit">
+        <div class="frame frame-jog">
+          <div class="jog idle-spin" id="jog">
+            <div class="jog-screen">
+              <span id="screenL1">OLIVER NEWTON</span>
+              <span id="screenL2">13-YR-OLD DJ · WIGAN</span>
+            </div>
+            <svg class="hand" id="hand" viewBox="0 0 100 100" fill="none">
+              <path d="M30 90 C25 70 25 55 30 45 C31 40 38 38 39 44 L40 60 M40 60 L41 38 C41 33 49 33 49 38 L49 60 M49 58 L50 36 C50 31 58 31 58 36 L58 58 M58 56 L60 42 C60 37 68 38 67 43 L64 62 C70 66 71 76 68 88 Z" fill="#F4EFE6" opacity="0.92"/>
+            </svg>
+          </div>
+          <div class="scroll-hint" id="scrollHint"><span>↓</span> SCROLL TO MIX</div>
+        </div>
+        <div class="frame frame-eq">
+          <div class="eq-cluster">
+            <div class="knob-row">
+              <div class="knob-col"><div class="knob knob-sm"><div class="ptr"></div></div><div class="knob-label">HI</div></div>
+              <div class="knob-col"><div class="knob knob-sm"><div class="ptr"></div></div><div class="knob-label">MID</div></div>
+              <div class="knob-col"><div class="knob knob-sm"><div class="ptr"></div></div><div class="knob-label">LOW</div></div>
+            </div>
+            <div class="knob-col">
+              <div class="knob selector" id="selector"><div class="ptr" id="pointer"></div></div>
+              <div class="stepper" id="stepper">
+                <span class="active"></span><span></span><span></span><span></span><span></span>
+              </div>
+            </div>
+            <div class="readout">
+              <div id="eqMain">BIRTHDAY PARTIES</div>
+              <div id="eqSub">All ages, all-request sets</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-col">
+
+      <section id="hero">
+        <div class="location-pill">📍 WIGAN · UK</div>
+        <h1>YOUNG<br><em>DJ.</em></h1>
+        <p class="sub">13-year-old DJ from Wigan, turning birthday parties, school discos and community events into proper dancefloors.</p>
+        <div class="tag-row">
+          <span class="tag">BIRTHDAY PARTIES</span>
+          <span class="tag">SCHOOL DISCOS</span>
+          <span class="tag">YOUTH EVENTS</span>
+          <span class="tag">COMMUNITY CELEBRATIONS</span>
+        </div>
+        <div class="cta-row">
+          <a href="https://wa.me/+447368803842" class="btn btn-primary">Book Oliver →</a>
+          <a href="#listen" class="btn btn-ghost">Hear a mix</a>
+        </div>
+      </section>
+
+      <section id="about">
+        <div class="eyebrow">About</div>
+        <h2>Music-first, every event</h2>
+        <p>From first song to last dance, Oliver reads the room and keeps the floor moving — blending chart hits, throwbacks and crowd requests into one continuous mix.</p>
+        <p>Available across Wigan and the surrounding areas:</p>
+        <div class="area-list">Standish · Orrell · Winstanley · Whelley · Ince · Shevington</div>
+        <div class="stat-row">
+          <div class="stat"><b>13</b><span>YEARS OLD</span></div>
+          <div class="stat"><b>All</b><span>AGES WELCOME</span></div>
+          <div class="stat"><b>5+</b><span>EVENT TYPES</span></div>
+        </div>
+      </section>
+
+      <section id="events">
+        <div class="eyebrow">The lineup</div>
+        <h2>Book for any occasion</h2>
+        <div class="event-list">
+          <div class="event"><div class="event-tag">01 / SELECT</div><h3>Birthday Parties</h3><p>All ages, all-request sets built around the guest of honour.</p></div>
+          <div class="event"><div class="event-tag">02 / SELECT</div><h3>School Discos</h3><p>High-energy, school-safe sets that keep the whole hall dancing.</p></div>
+          <div class="event"><div class="event-tag">03 / SELECT</div><h3>Local Youth Events</h3><p>Youth clubs, holiday clubs and community youth programmes.</p></div>
+          <div class="event"><div class="event-tag">04 / SELECT</div><h3>Community Celebrations</h3><p>Fetes, fundraisers and neighbourhood get-togethers.</p></div>
+          <div class="event"><div class="event-tag">05 / SELECT</div><h3>Special Occasions</h3><p>Something else in mind? Tell me what you need.</p></div>
+        </div>
+      </section>
+
+      <section id="gallery">
+        <div class="eyebrow">On the decks</div>
+        <h2>From the gigs</h2>
+        <div class="gallery-grid">
+          <div class="gallery-item g1"><span>Community event</span></div>
+          <div class="gallery-item g2"><span>Purple lighting set</span></div>
+          <div class="gallery-item g3"><span>Mixing live</span></div>
+          <div class="gallery-item g4"><span>Oliver Newton</span></div>
+        </div>
+        <!-- Swap these four blocks for real photos:
+             <div class="gallery-item"><img src="your-photo.webp" alt="..."></div> -->
+      </section>
+
+      <section id="listen">
+        <div class="eyebrow">Tune in</div>
+        <h2>Listen to the mixes</h2>
+        <div class="card">
+          <div class="kicker">DJ Mix</div>
+          <h3>Latest Set</h3>
+          <p>A fresh mix showing off the blend of energy and flow Oliver brings to every booking.</p>
+          <a href="https://olivernewton.uk/olivernewton/dj-mixes" class="btn btn-primary btn-sm">Listen Now →</a>
+        </div>
+        <div class="card">
+          <div class="kicker">Streaming</div>
+          <h3>All Platforms</h3>
+          <p>Stream Oliver's music on Spotify, Apple Music, and everywhere else you listen.</p>
+          <a href="https://linktr.ee/olivernewtonstreamingplatforms" class="btn btn-ghost btn-sm">Take Me There →</a>
+        </div>
+      </section>
+
+      <section id="follow">
+        <div class="eyebrow">Stay in the loop</div>
+        <h2>Follow along</h2>
+        <div class="social-grid">
+          <a class="social-item" href="https://www.instagram.com/olivernewtonmusic">Instagram ↗</a>
+          <a class="social-item" href="https://www.facebook.com/share/1HDp9FhN3E/?mibextid=wwXIfr">Facebook ↗</a>
+          <a class="social-item" href="https://youtube.com/@olivernewtonmusic">YouTube ↗</a>
+          <a class="social-item" href="https://www.tiktok.com/@olivernewtonmusic">TikTok ↗</a>
+          <a class="social-item" href="https://twitch.tv/olivernewtonmusic">Twitch ↗</a>
+          <a class="social-item" href="https://g.page/Oliver%20Newton%20Wigan">Reviews ↗</a>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="cta-band">
+          <div class="eyebrow">Get in touch</div>
+          <h2>Let's make it unforgettable</h2>
+          <p>Get in touch to check availability and lock in Oliver for your next event.</p>
+          <a href="https://wa.me/+447368803842" class="btn btn-primary">Message on WhatsApp →</a>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-row">
+    <span>© 2026 Oliver Newton · Wigan, UK</span>
+    <span>WHATSAPP: +44 7368 803842</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var rig = document.querySelector('.rig-wrap');
+  var jog = document.getElementById('jog');
+  var hand = document.getElementById('hand');
+  var screenL1 = document.getElementById('screenL1');
+  var screenL2 = document.getElementById('screenL2');
+  var frameJog = document.querySelector('.frame-jog');
+  var frameEq = document.querySelector('.frame-eq');
+  var pointer = document.getElementById('pointer');
+  var selector = document.getElementById('selector');
+  var eqMain = document.getElementById('eqMain');
+  var eqSub = document.getElementById('eqSub');
+  var stepper = document.getElementById('stepper');
+  var dots = stepper ? Array.prototype.slice.call(stepper.children) : [];
+  var scrollHint = document.getElementById('scrollHint');
+
+  var categories = [
+    ['BIRTHDAY PARTIES','All ages, all-request sets'],
+    ['SCHOOL DISCOS','High-energy, school-safe'],
+    ['LOCAL YOUTH EVENTS','Youth & holiday clubs'],
+    ['COMMUNITY CELEBRATIONS','Fetes & fundraisers'],
+    ['SPECIAL OCCASIONS','Tell me what you need']
+  ];
+  var angles = [-64,-32,0,32,64];
+
+  function isDesktop(){ return window.innerWidth > 880; }
+
+  function setScreen(l1,l2){
+    if(screenL1.textContent !== l1){ screenL1.textContent = l1; screenL2.textContent = l2; }
+  }
+  function setEq(i){
+    if(pointer) pointer.style.transform = 'translateX(-50%) rotate(' + angles[i] + 'deg)';
+    if(eqMain.textContent !== categories[i][0]){
+      eqMain.textContent = categories[i][0];
+      eqSub.textContent = categories[i][1];
+    }
+    dots.forEach(function(d,idx){ d.classList.toggle('active', idx===i); });
+  }
+
+  if(reduceMotion || !rig || !jog){
+    // Static, accessible fallback: no scroll-jacking, content already correct by default.
+    return;
+  }
+
+  var idleOn = true, lastIdx = 0, ticking = false;
+
+  function frame(){
+    ticking = false;
+    if(!isDesktop()){ return; }
+    var rect = rig.getBoundingClientRect();
+    var pinnable = rect.height - window.innerHeight;
+    var p = pinnable > 0 ? (-rect.top) / pinnable : 0;
+    p = Math.max(0, Math.min(1, p));
+
+    if(scrollHint) scrollHint.style.opacity = p < 0.05 ? 1 : 0;
+
+    if(p < 0.10){
+      if(!idleOn){ jog.classList.add('idle-spin'); jog.style.transform=''; idleOn = true; }
+      hand.style.opacity = 0;
+      setScreen('OLIVER NEWTON','13-YR-OLD DJ · WIGAN');
+    } else if(p < 0.17){
+      if(idleOn){ jog.classList.remove('idle-spin'); idleOn = false; }
+      var lp = (p - 0.10) / 0.07;
+      jog.style.transform = 'rotate(' + (-lp*720) + 'deg)';
+      hand.style.opacity = Math.sin(Math.min(lp,1) * Math.PI);
+      if(lp > 0.45){ setScreen('MUSIC-FIRST,','EVERY EVENT'); }
+    } else if(p < 0.36){
+      if(!idleOn){ jog.classList.add('idle-spin'); jog.style.transform=''; idleOn = true; }
+      hand.style.opacity = 0;
+      setScreen('MUSIC-FIRST,','EVERY EVENT');
+    }
+
+    if(p < 0.36){
+      frameJog.style.opacity = 1; frameJog.style.transform = '';
+      frameEq.style.opacity = 0; frameEq.style.transform = 'translateY(24px) scale(.92)';
+      selector.classList.remove('settled');
+    } else if(p < 0.44){
+      var lpan = (p - 0.36) / 0.08;
+      frameJog.style.opacity = 1 - lpan; frameJog.style.transform = 'translateY(' + (-lpan*24) + 'px) scale(' + (1-lpan*0.08) + ')';
+      frameEq.style.opacity = lpan; frameEq.style.transform = 'translateY(' + ((1-lpan)*24) + 'px) scale(' + (0.92+lpan*0.08) + ')';
+      selector.classList.remove('settled');
+    } else {
+      frameJog.style.opacity = 0;
+      frameEq.style.opacity = 1; frameEq.style.transform = '';
+    }
+
+    if(p >= 0.44 && p < 0.66){
+      var lq = (p - 0.44) / 0.22;
+      var idx = Math.min(4, Math.floor(lq * 5));
+      if(idx !== lastIdx){ lastIdx = idx; }
+      setEq(idx);
+      selector.classList.remove('settled');
+    } else if(p >= 0.66){
+      if(lastIdx !== -1){
+        lastIdx = -1;
+        eqMain.textContent = 'NOW BOOKING';
+        eqSub.textContent = 'Message on WhatsApp';
+        dots.forEach(function(d){ d.classList.add('active'); });
+      }
+      selector.classList.add('settled');
+    }
+  }
+
+  function onScroll(){
+    if(!ticking){ ticking = true; requestAnimationFrame(frame); }
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', onScroll);
+  frame();
+})();
+</script>
+
+</body>
+</html>
