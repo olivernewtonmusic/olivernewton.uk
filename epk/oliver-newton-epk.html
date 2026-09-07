@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oliver Newton — Press Kit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0a0e0d;
+    --bg-elevated: #101615;
+    --bg-card: #121816;
+    --accent: #10DAA4;
+    --accent-deep: #0a8f6c;
+    --accent-soft: rgba(16, 218, 164, 0.14);
+    --text: #edf2f0;
+    --text-muted: #93a19c;
+    --border: rgba(237, 242, 240, 0.09);
+    --max: 880px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* subtle ambient gradient wash across the page */
+  body::before{
+    content: "";
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 900px 500px at 15% -5%, rgba(16,218,164,0.10), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 100% 20%, rgba(16,218,164,0.06), transparent 55%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  h1, h2, h3, .display {
+    font-family: 'Space Grotesk', sans-serif;
+    letter-spacing: -0.02em;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  section { position: relative; z-index: 1; }
+
+  .wrap {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  /* header */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(10, 14, 13, 0.75);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+  header .wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+  .brand {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 1.05rem;
+  }
+  .brand span { color: var(--accent); }
+  .header-cta {
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 9px 18px;
+    border-radius: 100px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+    color: #06110d;
+  }
+
+  /* hero */
+  .hero {
+    padding: 96px 0 72px;
+  }
+  .kicker {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 18px;
+  }
+  .hero h1 {
+    font-size: clamp(2.6rem, 7vw, 4.6rem);
+    font-weight: 700;
+    line-height: 0.98;
+    margin-bottom: 22px;
+  }
+  .hero h1 .accent-word {
+    background: linear-gradient(120deg, var(--accent), #6df0cf);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .hero p.lede {
+    max-width: 56ch;
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-bottom: 36px;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 24px;
+    border-radius: 100px;
+    font-weight: 500;
+    font-size: 0.95rem;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+    color: #06110d;
+  }
+  .btn-ghost {
+    border: 1px solid var(--border);
+    color: var(--text);
+  }
+
+  /* stat row */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-top: 64px;
+  }
+  .stat {
+    background: var(--bg-card);
+    padding: 28px 22px;
+  }
+  .stat .num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--accent);
+  }
+  .stat .label {
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    margin-top: 4px;
+  }
+
+  /* section headers */
+  .section-head {
+    margin-bottom: 32px;
+  }
+  .section-head h2 {
+    font-size: 1.9rem;
+    font-weight: 600;
+  }
+  .section-head p {
+    color: var(--text-muted);
+    margin-top: 8px;
+    max-width: 60ch;
+  }
+
+  section.block { padding: 64px 0; border-top: 1px solid var(--border); }
+
+  /* services */
+  .services {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .service-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px;
+  }
+  .service-card h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .service-card p {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+  }
+
+  /* listen */
+  .mixes { display: flex; flex-direction: column; gap: 20px; }
+  .mix-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px;
+  }
+  .mix-card .mix-label {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+  .mix-card iframe {
+    width: 100%;
+    border: none;
+    border-radius: 8px;
+    display: block;
+  }
+
+  /* coverage */
+  .coverage-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .coverage-list span {
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    padding: 8px 16px;
+    border-radius: 100px;
+    font-size: 0.88rem;
+    color: var(--text-muted);
+  }
+
+  /* contact / footer */
+  .contact-block {
+    background: linear-gradient(160deg, var(--bg-card), var(--bg));
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 48px 36px;
+    text-align: left;
+  }
+  .contact-block h2 {
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .contact-block p {
+    color: var(--text-muted);
+    margin-bottom: 28px;
+    max-width: 50ch;
+  }
+  .social-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 28px;
+  }
+  .social-row a {
+    border: 1px solid var(--border);
+    padding: 8px 16px;
+    border-radius: 100px;
+    font-size: 0.86rem;
+    color: var(--text-muted);
+  }
+  .social-row a:hover { color: var(--accent); border-color: var(--accent); }
+
+  footer {
+    padding: 32px 0 48px;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    text-align: center;
+  }
+
+  @media (max-width: 640px) {
+    .stats { grid-template-columns: 1fr; }
+    .services { grid-template-columns: 1fr; }
+    .contact-block { padding: 32px 22px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="brand">OLIVER <span>NEWTON</span></div>
+    <a class="header-cta" href="https://wa.me/+447368803842" target="_blank" rel="noopener">Check Availability</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="kicker">Press Kit · Wigan, UK</div>
+    <h1>DJ sets that keep<br>the <span class="accent-word">whole room</span><br>on the floor.</h1>
+    <p class="lede">Oliver Newton brings high-energy, seamless mixes to birthday parties, school discos, youth events and community celebrations across Wigan and the surrounding areas.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="https://wa.me/+447368803842" target="_blank" rel="noopener">Message on WhatsApp</a>
+      <a class="btn btn-ghost" href="#listen">Hear the Mixes</a>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="num">5+</div>
+        <div class="label">Event types covered</div>
+      </div>
+      <div class="stat">
+        <div class="num">6</div>
+        <div class="label">Towns across the borough</div>
+      </div>
+      <div class="stat">
+        <div class="num">All</div>
+        <div class="label">Ages welcome</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Book for any occasion</h2>
+      <p>Music-first, every event — reading the room and blending chart hits, throwbacks and crowd requests into one continuous mix.</p>
+    </div>
+    <div class="services">
+      <div class="service-card">
+        <h3>Birthday Parties</h3>
+        <p>Sets built around the birthday crowd, from first song to last dance.</p>
+      </div>
+      <div class="service-card">
+        <h3>School Discos</h3>
+        <p>Safe, high-energy sets tuned to the room and the age group.</p>
+      </div>
+      <div class="service-card">
+        <h3>Local Youth Events</h3>
+        <p>Community-focused bookings with music that brings everyone together.</p>
+      </div>
+      <div class="service-card">
+        <h3>Community Celebrations</h3>
+        <p>Borough-wide events that need a DJ who can read a mixed crowd.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="listen">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Listen to the mixes</h2>
+      <p>A couple of recent sets that show the blend of energy and flow Oliver brings to every booking.</p>
+    </div>
+    <div class="mixes">
+      <div class="mix-card">
+        <div class="mix-label">Mix 01</div>
+        <iframe height="140" scrolling="no" allow="autoplay"
+          src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/olivernewtonmusic/mix1&color=%2310daa4&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false">
+        </iframe>
+      </div>
+      <div class="mix-card">
+        <div class="mix-label">Mix 02</div>
+        <iframe height="140" scrolling="no" allow="autoplay"
+          src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/olivernewtonmusic/mix2&color=%2310daa4&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="coverage">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Where Oliver plays</h2>
+      <p>Based in Wigan, covering the wider borough.</p>
+    </div>
+    <div class="coverage-list">
+      <span>Wigan</span>
+      <span>Standish</span>
+      <span>Orrell</span>
+      <span>Winstanley</span>
+      <span>Whelley</span>
+      <span>Ince</span>
+      <span>Shevington</span>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="book">
+  <div class="wrap">
+    <div class="contact-block">
+      <h2>Let's make it unforgettable.</h2>
+      <p>Get in touch to check availability and lock in Oliver for your next event.</p>
+      <a class="btn btn-primary" href="https://wa.me/+447368803842" target="_blank" rel="noopener">Message on WhatsApp</a>
+      <div class="social-row">
+        <a href="https://www.instagram.com/olivernewtonmusic" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.facebook.com/share/1HDp9FhN3E/?mibextid=wwXIfr" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://youtube.com/@olivernewtonmusic" target="_blank" rel="noopener">YouTube</a>
+        <a href="https://www.tiktok.com/@olivernewtonmusic" target="_blank" rel="noopener">TikTok</a>
+        <a href="https://twitch.tv/olivernewtonmusic" target="_blank" rel="noopener">Twitch</a>
+        <a href="https://g.page/Oliver%20Newton%20Wigan" target="_blank" rel="noopener">Google Reviews</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 Oliver Newton — Wigan, UK
+</footer>
+
+</body>
+</html>
