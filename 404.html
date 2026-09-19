@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page not found | Oliver Newton</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0A1A1F">
+<link rel="icon" href="https://olivernewton.uk/oliver-logo.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --ink:#0A1A1F;
+    --ink-2:#102830;
+    --mint:#10daa4;
+    --mint-hover:#3fe6b8;
+    --on-ink:#E9F3F1;
+    --on-ink-muted:#94ABB1;
+    --gutter:clamp(1.25rem,4vw,2.5rem);
+    --display:'Big Shoulders Display','Arial Narrow',Impact,sans-serif;
+    --body:'Hanken Grotesk',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  }
+
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;
+    background-color:var(--ink);
+    background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.035) 0 1px,transparent 1px 72px);
+    color:var(--on-ink);font-family:var(--body);font-size:1.0625rem;line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,p,ul{margin:0}
+  ul{padding:0;list-style:none}
+  a{color:inherit}
+  :focus-visible{outline:3px solid var(--mint);outline-offset:3px;border-radius:4px}
+  .wrap{width:min(1200px,100% - 2*var(--gutter));margin-inline:auto}
+
+  /* Buttons (same as the main site) */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;
+    padding:.85rem 1.5rem;border-radius:999px;border:2px solid transparent;
+    font-family:var(--body);font-size:1rem;font-weight:600;line-height:1.2;
+    text-decoration:none;cursor:pointer;
+    transition:background .18s,color .18s,border-color .18s,transform .18s;
+  }
+  .btn:active{transform:translateY(1px)}
+  .btn-mint{background:var(--mint);color:var(--ink)}
+  .btn-mint:hover{background:var(--mint-hover)}
+  .btn-ghost{border-color:rgba(233,243,241,.32);color:var(--on-ink)}
+  .btn-ghost:hover{border-color:var(--mint);color:var(--mint)}
+
+  /* Header */
+  .top{padding-block:.8rem}
+  .top .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+  .brand{display:inline-flex;align-items:center;gap:.7rem;text-decoration:none;color:var(--on-ink)}
+  .brand img{height:44px;width:auto}
+  .brand span{font-family:var(--display);font-weight:800;font-size:1.5rem;letter-spacing:.06em;line-height:1}
+
+  /* Main */
+  main{flex:1;display:grid;align-content:center;justify-items:center;text-align:center;padding:clamp(2rem,6vw,4rem) var(--gutter)}
+  .big{
+    display:flex;align-items:center;justify-content:center;gap:.03em;
+    font-family:var(--display);font-weight:900;color:#fff;
+    font-size:clamp(9rem,30vw,22rem);line-height:.8;letter-spacing:-.01em;
+  }
+  .big .digit{display:block;transform:translateY(.02em)}
+  .record{width:.68em;height:.68em;display:block;flex:none}
+  .record .spin{transform-origin:50% 50%;animation:spin 7s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  h1{
+    margin-top:clamp(1.25rem,3vw,2rem);
+    font-family:var(--display);font-weight:800;color:#fff;
+    font-size:clamp(2.6rem,6vw,4.25rem);line-height:.95;
+  }
+  .lead{margin-top:1rem;max-width:30rem;color:var(--on-ink-muted);font-size:1.15rem}
+  .cta-row{display:flex;flex-wrap:wrap;justify-content:center;gap:.75rem 1rem;margin-top:2rem}
+  .jump{margin-top:2.25rem;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:.5rem 1.25rem;color:var(--on-ink-muted);font-size:.98rem}
+  .jump ul{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem 1.25rem}
+  .jump a{color:var(--on-ink);font-weight:600;text-underline-offset:5px;text-decoration-color:var(--mint);text-decoration-thickness:2px}
+  .jump a:hover{color:var(--mint)}
+
+  /* Waveform that runs out */
+  .deck{position:relative;height:120px;border-top:1px solid rgba(255,255,255,.1)}
+  .deck canvas{display:block;width:100%;height:100%;touch-action:pan-y;cursor:ew-resize}
+  .deck-hint{position:absolute;left:var(--gutter);top:.6rem;font-size:.82rem;color:var(--on-ink-muted);pointer-events:none}
+
+  footer{padding:1.25rem 0;font-size:.95rem;color:var(--on-ink-muted);border-top:1px solid rgba(255,255,255,.1)}
+
+  @media (max-width:640px){
+    .deck{height:96px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation:none!important;transition:none!important}
+  }
+</style>
+</head>
+
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Oliver Newton, home">
+      <img src="https://olivernewton.uk/oliver-logo.webp" alt="" onerror="this.remove()">
+      <span>OLIVER NEWTON</span>
+    </a>
+    <a class="btn btn-mint" href="/#book">Book Oliver</a>
+  </div>
+</header>
+
+<main>
+  <div class="big" aria-hidden="true">
+    <span class="digit">4</span>
+    <svg class="record" viewBox="0 0 200 200">
+      <g class="spin">
+        <circle cx="100" cy="100" r="98" fill="#102830" stroke="#E9F3F1" stroke-opacity=".28" stroke-width="2"/>
+        <circle cx="100" cy="100" r="86" fill="none" stroke="#E9F3F1" stroke-opacity=".12" stroke-width="1.5"/>
+        <circle cx="100" cy="100" r="76" fill="none" stroke="#E9F3F1" stroke-opacity=".12" stroke-width="1.5"/>
+        <circle cx="100" cy="100" r="66" fill="none" stroke="#E9F3F1" stroke-opacity=".12" stroke-width="1.5"/>
+        <circle cx="100" cy="100" r="56" fill="none" stroke="#E9F3F1" stroke-opacity=".12" stroke-width="1.5"/>
+        <path d="M100 8a92 92 0 0 1 65 27" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="100" cy="100" r="34" fill="#10daa4"/>
+        <circle cx="100" cy="100" r="6" fill="#0A1A1F"/>
+      </g>
+    </svg>
+    <span class="digit">4</span>
+  </div>
+
+  <h1>Page not found</h1>
+  <p class="lead">That link doesn't lead anywhere. The page may have moved, or the address might have a typo.</p>
+
+  <div class="cta-row">
+    <a class="btn btn-mint" href="/">Back to home</a>
+    <a class="btn btn-ghost" href="/#book">Book Oliver</a>
+  </div>
+
+  <nav class="jump" aria-label="Jump to a section">
+    <span>Or jump to</span>
+    <ul>
+      <li><a href="/#about">About</a></li>
+      <li><a href="/#events">Events</a></li>
+      <li><a href="/#gallery">Gallery</a></li>
+      <li><a href="/#listen">Listen</a></li>
+    </ul>
+  </nav>
+</main>
+
+<div class="deck">
+  <span class="deck-hint">Nothing playing here. Move across to scrub.</span>
+  <canvas id="wave" aria-hidden="true"></canvas>
+</div>
+
+<footer>
+  <div class="wrap">&copy; 2026 Oliver Newton, Wigan, UK</div>
+</footer>
+
+<script>
+(function () {
+  var c = document.getElementById('wave');
+  if (!c || !c.getContext) return;
+  var ctx = c.getContext('2d');
+  var END = 0.38;            /* the "track" ends here, the rest is silence */
+  var pos = END, W = 0, H = 0, bars = [];
+
+  function rnd(i) { var x = Math.sin(i * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); }
+
+  function build() {
+    var r = c.getBoundingClientRect(), d = window.devicePixelRatio || 1;
+    W = r.width; H = r.height;
+    c.width = Math.round(W * d); c.height = Math.round(H * d);
+    ctx.setTransform(d, 0, 0, d, 0, 0);
+    var n = Math.max(20, Math.floor(W / 8));
+    bars = [];
+    for (var i = 0; i < n; i++) {
+      var t = i / n;
+      var env = 0.3 + 0.7 * Math.abs(Math.sin(t * 9.4 + 1.2) * Math.cos(t * 3.1 + 0.4));
+      var beat = (i % 8 === 0) ? 0.35 : (i % 4 === 0 ? 0.2 : 0);
+      bars.push(Math.min(1, (0.15 + rnd(i) * 0.5) * env * 1.25 + beat * rnd(i + 9)));
+    }
+    draw();
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    var n = bars.length, bw = W / n, mid = H / 2 + 6;
+    for (var i = 0; i < n; i++) {
+      var p = i / n, hasSignal = p < END, played = p < pos;
+      var h = hasSignal ? Math.max(4, bars[i] * H * 0.66) : 2;
+      ctx.fillStyle = hasSignal
+        ? (played ? '#10daa4' : 'rgba(233,243,241,.26)')
+        : 'rgba(233,243,241,.18)';
+      ctx.fillRect(i * bw + 1, mid - h / 2, Math.max(2, bw - 3), h);
+    }
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(pos * W - 1, 22, 2, H - 28);
+  }
+
+  c.addEventListener('pointermove', function (e) {
+    var r = c.getBoundingClientRect();
+    pos = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width));
+    draw();
+  });
+  c.addEventListener('pointerleave', function () { pos = END; draw(); });
+
+  var raf;
+  window.addEventListener('resize', function () { cancelAnimationFrame(raf); raf = requestAnimationFrame(build); });
+  build();
+})();
+</script>
+</body>
+</html>
