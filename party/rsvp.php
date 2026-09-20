@@ -9,7 +9,7 @@
  */
 
 // ========== SETTINGS ==========
-$ADMIN_PASSWORD = 'change-me';      // Change this before you upload. The replies page stays locked until you do.
+$ADMIN_PASSWORD = 'happy14th';      // Change this before you upload. The replies page stays locked until you do.
 $MAX_ENTRIES    = 500;              // Stops the list growing without limit.
 // ==============================
 
