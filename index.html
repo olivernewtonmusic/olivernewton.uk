@@ -346,6 +346,18 @@
   .field.has-value .pick{color:var(--ink)}
   .field.invalid input,.field.invalid select,.field.invalid textarea,.field.invalid .pick{border-color:var(--danger)}
   .err{color:var(--danger);font-size:.9rem;font-weight:500}
+  .ac{position:relative}
+  .ac-list{
+    position:absolute;z-index:30;left:0;right:0;top:calc(100% + 4px);margin:0;padding:.35rem;list-style:none;
+    background:var(--card);border:1.5px solid var(--line);border-radius:12px;
+    box-shadow:0 14px 32px rgba(10,26,31,.18);max-height:280px;overflow:auto;
+  }
+  .ac-list li{padding:.6rem .75rem;border-radius:8px;cursor:pointer;min-height:46px;display:grid;align-content:center;gap:.1rem}
+  .ac-list li b{font-weight:600}
+  .ac-list li small{color:var(--slate);font-size:.85rem}
+  .ac-list li:hover,.ac-list li[aria-selected="true"]{background:var(--mint-tint)}
+  .ac-list li.ac-note{color:var(--slate);cursor:default;font-size:.92rem}
+  .ac-list li.ac-note:hover{background:transparent}
   .form .btn{width:100%}
   .form .fine{font-size:.9rem;color:var(--slate)}
   .form .fine.error{color:var(--danger);font-weight:600}
@@ -729,17 +741,17 @@
         <p class="err" id="e-eventOther" hidden></p>
       </div>
 
-      <div class="row">
-        <div class="field" id="fld-date">
-          <span class="lab" id="l-date">Date</span>
-          <button class="pick" type="button" id="dateBtn" aria-haspopup="dialog" aria-labelledby="l-date dateVal">
-            <span id="dateVal">Choose a date</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M8 3v4M16 3v4M3.5 10h17"/></svg>
-          </button>
-          <input type="hidden" id="f-date" name="date">
-          <p class="err" id="e-date" hidden></p>
-        </div>
+      <div class="field" id="fld-date">
+        <span class="lab" id="l-date">Date</span>
+        <button class="pick" type="button" id="dateBtn" aria-haspopup="dialog" aria-labelledby="l-date dateVal">
+          <span id="dateVal">Choose a date</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M8 3v4M16 3v4M3.5 10h17"/></svg>
+        </button>
+        <input type="hidden" id="f-date" name="date">
+        <p class="err" id="e-date" hidden></p>
+      </div>
 
+      <div class="row">
         <div class="field" id="fld-time">
           <span class="lab" id="l-time">Start time</span>
           <button class="pick" type="button" id="timeBtn" aria-haspopup="dialog" aria-labelledby="l-time timeVal">
@@ -749,30 +761,55 @@
           <input type="hidden" id="f-time" name="time">
           <p class="err" id="e-time" hidden></p>
         </div>
+
+        <div class="field" id="fld-endTime">
+          <span class="lab" id="l-endTime">Finish time</span>
+          <button class="pick" type="button" id="endBtn" aria-haspopup="dialog" aria-labelledby="l-endTime endVal">
+            <span id="endVal">Choose a time</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>
+          </button>
+          <input type="hidden" id="f-endtime" name="endTime">
+          <p class="err" id="e-endTime" hidden></p>
+        </div>
       </div>
 
-      <div class="field" id="fld-area">
-        <label for="f-area">Area</label>
-        <select id="f-area" name="area" required>
-          <option value="">Choose an area</option>
-          <option>Wigan</option><option>Standish</option><option>Orrell</option>
-          <option>Winstanley</option><option>Whelley</option><option>Ince</option>
-          <option>Shevington</option>
-          <option value="Other">Other (please specify)</option>
-        </select>
-        <p class="err" id="e-area" hidden></p>
-      </div>
-
-      <div class="field" id="fld-areaOther" hidden>
-        <label for="f-area-other">Where is the event?</label>
-        <input id="f-area-other" name="areaOther" type="text" placeholder="Town or area">
-        <p class="err" id="e-areaOther" hidden></p>
+      <div class="field" id="fld-address">
+        <label for="f-address">Event address</label>
+        <div class="ac">
+          <input id="f-address" name="address" type="text" autocomplete="off" autocapitalize="words" spellcheck="false"
+                 role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="addrList"
+                 placeholder="Start typing a street, postcode or venue" required>
+          <ul class="ac-list" id="addrList" role="listbox" aria-label="Address suggestions" hidden></ul>
+        </div>
+        <p class="err" id="e-address" hidden></p>
       </div>
 
       <div class="field" id="fld-notes">
         <label for="f-notes">Tell Oliver about the event</label>
-        <textarea id="f-notes" name="notes" placeholder="Age group, finish time, music you love" required></textarea>
+        <textarea id="f-notes" name="notes" placeholder="Age group, music you love, anything Oliver should know" required></textarea>
         <p class="err" id="e-notes" hidden></p>
+      </div>
+
+      <div class="field" id="fld-heard">
+        <label for="f-heard">Where did you hear about us?</label>
+        <select id="f-heard" name="heard" required>
+          <option value="">Choose an option</option>
+          <option>Instagram</option>
+          <option>Facebook</option>
+          <option>TikTok</option>
+          <option>Google search</option>
+          <option>Friend or family</option>
+          <option>Saw Oliver at an event</option>
+          <option>School or youth club</option>
+          <option value="Other">Other (please specify)</option>
+        </select>
+        <p class="err" id="e-heard" hidden></p>
+      </div>
+
+      <div class="field" id="fld-heardOther" hidden>
+        <label for="f-heard-other">Where did you hear about us?</label>
+        <input id="f-heard-other" name="heardOther" type="text" placeholder="For example, a flyer or a local newspaper">
+        <p class="err" id="e-heardOther" hidden></p>
       </div>
 
       <button class="btn btn-mint" type="submit">Send on WhatsApp</button>
@@ -804,7 +841,7 @@
 <!-- Time picker sheet -->
 <dialog class="sheet" id="timeSheet" aria-label="Choose a start time">
   <div class="sheet-in">
-    <h3>Start time</h3>
+    <h3 id="tTitle">Start time</h3>
     <p class="t-preview" id="tPreview" aria-live="polite">Choose an hour and minutes.</p>
 
     <div class="t-group">
@@ -981,10 +1018,11 @@
   var DEFAULT_MSG = 'This opens WhatsApp with your details filled in. Nothing is sent until you press send there.';
   var el = {
     name: $('f-name'), event: $('f-event'), eventOther: $('f-event-other'),
-    date: $('f-date'), time: $('f-time'),
-    area: $('f-area'), areaOther: $('f-area-other'), notes: $('f-notes')
+    date: $('f-date'), time: $('f-time'), endTime: $('f-endtime'),
+    address: $('f-address'), notes: $('f-notes'),
+    heard: $('f-heard'), heardOther: $('f-heard-other')
   };
-  var focusTarget = { date: $('dateBtn'), time: $('timeBtn') };
+  var focusTarget = { date: $('dateBtn'), time: $('timeBtn'), endTime: $('endBtn') };
 
   function setErr(k, text) {
     var f = $('fld-' + k), e = $('e-' + k), c = focusTarget[k] || el[k];
@@ -996,7 +1034,7 @@
       c.removeAttribute('aria-invalid'); c.removeAttribute('aria-describedby');
     }
   }
-  ['name', 'event', 'eventOther', 'area', 'areaOther', 'notes'].forEach(function (k) {
+  ['name', 'event', 'eventOther', 'address', 'notes', 'heard', 'heardOther'].forEach(function (k) {
     el[k].addEventListener('input', function () { setErr(k, ''); });
     el[k].addEventListener('change', function () { setErr(k, ''); });
   });
@@ -1010,7 +1048,7 @@
     });
   }
   bindOther(el.event, 'eventOther');
-  bindOther(el.area, 'areaOther');
+  bindOther(el.heard, 'heardOther');
 
   /* Event rows pre-fill the form */
   document.querySelectorAll('.event').forEach(function (btn) {
@@ -1089,11 +1127,15 @@
     $('dateBtn').focus();
   });
 
-  /* ---------- Custom time picker ---------- */
-  var timeSheet = $('timeSheet'), tSet = $('tSet'), tPreview = $('tPreview');
+  /* ---------- Custom time picker (shared by start and finish) ---------- */
+  var timeSheet = $('timeSheet'), tSet = $('tSet'), tPreview = $('tPreview'), tTitle = $('tTitle');
   var tHours = $('tHours'), tMins = $('tMins'), tAmpm = $('tAmpm');
   var pick = { h: null, m: null, p: 'pm' };
-  var savedPick = null;
+  var timeFields = {
+    time:    { label: 'Start time',  btn: $('timeBtn'), val: $('timeVal'), fld: $('fld-time'),    saved: null },
+    endTime: { label: 'Finish time', btn: $('endBtn'),  val: $('endVal'),  fld: $('fld-endTime'), saved: null }
+  };
+  var activeTime = 'time';
 
   function makeChips(host, values, key) {
     values.forEach(function (v) {
@@ -1116,7 +1158,7 @@
     });
     var ready = pick.h !== null && pick.m !== null;
     tSet.disabled = !ready;
-    tPreview.textContent = ready ? 'Start time: ' + fmtTime(pick) : 'Choose an hour and minutes.';
+    tPreview.textContent = ready ? timeFields[activeTime].label + ': ' + fmtTime(pick) : 'Choose an hour and minutes.';
   }
   timeSheet.addEventListener('click', function (e) {
     var c = e.target.closest('.chip');
@@ -1124,19 +1166,131 @@
     pick[c.getAttribute('data-key')] = c.getAttribute('data-val');
     renderTime();
   });
-  $('timeBtn').addEventListener('click', function () {
-    pick = savedPick ? { h: savedPick.h, m: savedPick.m, p: savedPick.p } : { h: null, m: null, p: 'pm' };
+  function openTime(k) {
+    activeTime = k;
+    var f = timeFields[k], sv = f.saved;
+    pick = sv ? { h: sv.h, m: sv.m, p: sv.p } : { h: null, m: null, p: 'pm' };
+    tTitle.textContent = f.label;
+    timeSheet.setAttribute('aria-label', 'Choose a ' + f.label.toLowerCase());
     renderTime();
     openDlg(timeSheet);
+  }
+  Object.keys(timeFields).forEach(function (k) {
+    timeFields[k].btn.addEventListener('click', function () { openTime(k); });
   });
   tSet.addEventListener('click', function () {
-    savedPick = { h: pick.h, m: pick.m, p: pick.p };
-    el.time.value = fmtTime(pick);
-    $('timeVal').textContent = fmtTime(pick);
-    $('fld-time').classList.add('has-value');
-    setErr('time', '');
+    var f = timeFields[activeTime];
+    f.saved = { h: pick.h, m: pick.m, p: pick.p };
+    el[activeTime].value = fmtTime(pick);
+    f.val.textContent = fmtTime(pick);
+    f.fld.classList.add('has-value');
+    setErr(activeTime, '');
     timeSheet.close();
-    $('timeBtn').focus();
+    f.btn.focus();
+  });
+
+  /* ---------- Address suggestions (OpenStreetMap data via Photon) ---------- */
+  var addrList = $('addrList'), addrTimer = null, addrReq = 0, addrAbort = null, addrActive = -1;
+  var WIGAN = { lat: 53.545, lon: -2.633 };
+
+  function addrOpen(on) {
+    addrList.hidden = !on;
+    el.address.setAttribute('aria-expanded', on ? 'true' : 'false');
+    if (!on) { addrActive = -1; el.address.removeAttribute('aria-activedescendant'); }
+  }
+  function addrParts(pr) {
+    var street = [pr.housenumber, pr.street].filter(Boolean).join(' ');
+    var raw = [pr.name, street, pr.district || pr.locality, pr.city || pr.town || pr.village, pr.postcode];
+    var out = [];
+    raw.forEach(function (x) { if (x && out.indexOf(x) === -1) out.push(x); });
+    return out;
+  }
+  function addrNote(text) {
+    addrList.textContent = '';
+    var li = document.createElement('li');
+    li.className = 'ac-note'; li.setAttribute('role', 'presentation'); li.textContent = text;
+    addrList.appendChild(li);
+    addrOpen(true);
+  }
+  function addrRender(items) {
+    addrList.textContent = '';
+    addrActive = -1;
+    items.forEach(function (it, i) {
+      var li = document.createElement('li');
+      li.id = 'addr-opt-' + i; li.setAttribute('role', 'option'); li.setAttribute('aria-selected', 'false');
+      li.setAttribute('data-label', it.label);
+      var b = document.createElement('b'); b.textContent = it.main; li.appendChild(b);
+      if (it.rest) { var sm = document.createElement('small'); sm.textContent = it.rest; li.appendChild(sm); }
+      addrList.appendChild(li);
+    });
+    addrOpen(true);
+  }
+  function addrSetActive(i) {
+    var opts = addrList.querySelectorAll('[role="option"]');
+    if (!opts.length) return;
+    addrActive = (i + opts.length) % opts.length;
+    opts.forEach(function (o, n) { o.setAttribute('aria-selected', n === addrActive ? 'true' : 'false'); });
+    el.address.setAttribute('aria-activedescendant', opts[addrActive].id);
+    opts[addrActive].scrollIntoView({ block: 'nearest' });
+  }
+  function addrChoose(li) {
+    el.address.value = li.getAttribute('data-label');
+    setErr('address', '');
+    addrOpen(false);
+  }
+  function addrSearch(q) {
+    var id = ++addrReq;
+    if (addrAbort) addrAbort.abort();
+    addrAbort = window.AbortController ? new AbortController() : null;
+    var url = 'https://photon.komoot.io/api/?q=' + encodeURIComponent(q) +
+      '&limit=10&lang=en&lat=' + WIGAN.lat + '&lon=' + WIGAN.lon;
+    fetch(url, addrAbort ? { signal: addrAbort.signal } : {})
+      .then(function (r) { if (!r.ok) throw new Error('bad'); return r.json(); })
+      .then(function (data) {
+        if (id !== addrReq) return;
+        var items = [];
+        (data.features || []).forEach(function (f) {
+          var pr = f.properties || {};
+          if (pr.countrycode && pr.countrycode !== 'GB') return;
+          var parts = addrParts(pr);
+          if (!parts.length) return;
+          var label = parts.join(', ');
+          if (items.some(function (x) { return x.label === label; })) return;
+          items.push({ label: label, main: parts[0], rest: parts.slice(1).join(', ') });
+        });
+        items = items.slice(0, 6);
+        if (items.length) addrRender(items);
+        else addrNote('No matches yet. Keep typing, or just enter the address yourself.');
+      })
+      .catch(function (err) {
+        if (err && err.name === 'AbortError') return;
+        if (id === addrReq) addrOpen(false);
+      });
+  }
+  el.address.addEventListener('input', function () {
+    clearTimeout(addrTimer);
+    var q = el.address.value.trim();
+    if (q.length < 3) { addrReq++; if (addrAbort) addrAbort.abort(); addrOpen(false); return; }
+    addrTimer = setTimeout(function () { addrSearch(q); }, 300);
+  });
+  el.address.addEventListener('keydown', function (e) {
+    var open = !addrList.hidden && addrList.querySelector('[role="option"]');
+    if (e.key === 'ArrowDown' && open) { e.preventDefault(); addrSetActive(addrActive + 1); }
+    else if (e.key === 'ArrowUp' && open) { e.preventDefault(); addrSetActive(addrActive - 1); }
+    else if (e.key === 'Enter' && open && addrActive > -1) {
+      e.preventDefault(); addrChoose(addrList.querySelectorAll('[role="option"]')[addrActive]);
+    }
+    else if (e.key === 'Escape' && !addrList.hidden) { e.preventDefault(); e.stopPropagation(); addrOpen(false); }
+  });
+  /* mousedown so the choice lands before the input loses focus */
+  addrList.addEventListener('mousedown', function (e) {
+    var li = e.target.closest('[role="option"]');
+    if (!li) return;
+    e.preventDefault(); addrChoose(li);
+  });
+  el.address.addEventListener('blur', function () { setTimeout(function () { addrOpen(false); }, 120); });
+  el.address.addEventListener('focus', function () {
+    if (addrList.querySelector('[role="option"]') && el.address.value.trim().length >= 3) addrOpen(true);
   });
 
   /* ---------- Validation and send ---------- */
@@ -1147,9 +1301,11 @@
       ['eventOther', function () { return el.event.value !== 'Other' || el.eventOther.value.trim(); }, 'Tell Oliver what kind of event it is.'],
       ['date', function () { return el.date.value; }, 'Choose a date.'],
       ['time', function () { return el.time.value; }, 'Choose a start time.'],
-      ['area', function () { return el.area.value; }, 'Choose an area.'],
-      ['areaOther', function () { return el.area.value !== 'Other' || el.areaOther.value.trim(); }, 'Tell Oliver where the event is.'],
-      ['notes', function () { return el.notes.value.trim(); }, 'Add a few details about the event.']
+      ['endTime', function () { return el.endTime.value; }, 'Choose a finish time.'],
+      ['address', function () { return el.address.value.trim(); }, 'Enter the event address.'],
+      ['notes', function () { return el.notes.value.trim(); }, 'Add a few details about the event.'],
+      ['heard', function () { return el.heard.value; }, 'Tell Oliver where you heard about him.'],
+      ['heardOther', function () { return el.heard.value !== 'Other' || el.heardOther.value.trim(); }, 'Tell Oliver where you heard about him.']
     ];
     var first = null;
     rules.forEach(function (r) {
@@ -1173,7 +1329,7 @@
     msg.textContent = DEFAULT_MSG;
 
     var ev = el.event.value === 'Other' ? 'Other: ' + el.eventOther.value.trim() : el.event.value;
-    var ar = el.area.value === 'Other' ? 'Other: ' + el.areaOther.value.trim() : el.area.value;
+    var hd = el.heard.value === 'Other' ? 'Other: ' + el.heardOther.value.trim() : el.heard.value;
     var dateText = new Date(el.date.value + 'T12:00:00').toLocaleDateString('en-GB',
       { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
     var lines = [
@@ -1182,8 +1338,10 @@
       'Event: ' + ev,
       'Date: ' + dateText,
       'Start time: ' + el.time.value,
-      'Area: ' + ar,
-      'Details: ' + el.notes.value.trim()
+      'Finish time: ' + el.endTime.value,
+      'Address: ' + el.address.value.trim(),
+      'Details: ' + el.notes.value.trim(),
+      'Heard about Oliver via: ' + hd
     ];
     window.open('https://wa.me/447368803842?text=' + encodeURIComponent(lines.join('\n')), '_blank', 'noopener');
   });
