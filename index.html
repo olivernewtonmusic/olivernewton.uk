@@ -305,7 +305,7 @@
   @keyframes eq{from{transform:scaleY(.35)}to{transform:scaleY(1.15)}}
 
   /* Booking */
-  .book-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(2rem,6vw,5.5rem);align-items:start}
+  .book-grid{display:grid;grid-template-columns:1fr;gap:clamp(2rem,6vw,5.5rem);align-items:start}
   .book-copy h2{margin-bottom:1.25rem}
   .steps{margin:2.25rem 0 2rem;display:grid;gap:1.25rem;counter-reset:step}
   .steps li{display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:start;counter-increment:step}
@@ -701,10 +701,9 @@
         <li><div><b>Check availability</b><span>The form opens WhatsApp, with your details filled in. Then, Oliver replies to confirm the date is free.</span></div></li>
         <li><div><b>Lock in Oliver</b><span>Once you've confirmed, the date is booked.</span></div></li>
       </ol>
+    </div>
 
-    
-      
-      <form class="form" id="enquiry" novalidate>
+    <form class="form" id="enquiry" novalidate>
       <h3>Check a date!</h3>
       <p class="fine">I'd love to DJ for you, let me know the details.</p>
       <p class="fine">All fields are required.</p>
